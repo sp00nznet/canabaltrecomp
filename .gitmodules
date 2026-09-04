@@ -1,0 +1,3 @@
+[submodule "iparecomp"]
+	path = iparecomp
+	url = https://github.com/sp00nznet/iparecomp.git

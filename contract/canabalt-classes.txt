@@ -1,0 +1,621 @@
+# Objective-C classes defined by this binary, and their methods.
+# The host instantiates the delegate and the view; everything else
+# is reached through objc_msgSend and needs no host code.
+# 49 classes, 518 methods.
+
+BG
+    -setRandom:                                       0x00015f44
+    -random                                           0x00015f30
+    -update                                           0x00015f58
+
+BestRun
+    -setDistance:                                     0x0002e258
+    -distance                                         0x0002e2e4
+
+Bomb
+    -update                                           0x0001f6bc
+    -add:                                             0x0001f554
+    -dealloc                                          0x0001f5a4
+    -initWithOrigin:player:gibs:sequence:             0x0001fbb4
+
+CBlock
+    -description                                      0x0001c7b4
+    -setImage:                                        0x0001c8f4
+
+CanabaltAppDelegate
+    -backgroundTask                                   0x000025c8
+    -persistentStoreCoordinator                       0x00003a2c
+    -managedObjectContext                             0x000029a8
+    -managedObjectModel                               0x00002a4c
+    -applicationDocumentsDirectory                    0x00003c28
+    -applicationWillTerminate                         0x00003b90
+    -preloadTextures                                  0x00002ab0
+    -preloadSounds                                    0x0000317c
+    -dealloc                                          0x00003968
+    -applicationDidBecomeActive:                      0x00003400
+    -applicationWillResignActive:                     0x00003430
+    -applicationDidFinishLaunching:                   0x00003460
+
+CraneTrigger
+    -render                                           0x0001cff8
+    -update                                           0x0001cffc
+    -dealloc                                          0x0001d050
+    -initWithFrame:player:                            0x0001d0b0
+
+DemoMgr
+    -render                                           0x0001fdac
+    -update                                           0x00020018
+    -add:                                             0x0001fdb0
+    -dealloc                                          0x0001fddc
+    -initWithX:player:children:                       0x0001fe58
+
+DetectTouchView
+    -setTwitterController:                            0x0002924c
+    -twitterController                                0x00029238
+    -touchesEnded:withEvent:                          0x00029b28
+
+DetectTouchViewTwo
+    -setNewNameController:                            0x0002e4d4
+    -newNameController                                0x0002e4c0
+    -touchesEnded:withEvent:                          0x0002e82c
+
+Dove
+    -setPlayer:                                       0x0001d8b8
+    -player                                           0x0001d898
+    -setTrigger:                                      0x0001d1fc
+    -trigger                                          0x0001d1e4
+    -update                                           0x0001d214
+    -dealloc                                          0x0001d41c
+    -release                                          0x0001d840
+    -retain                                           0x0001d1c8
+    -initWithOrigin:player:trigger:                   0x0001d47c
+
+FlxAnim
+    -setName:                                         0x00015ec4
+    -name                                             0x00015e84
+    -setDelay:                                        0x00015ce8
+    -delay                                            0x00015cd0
+    -setFrames:                                       0x00015ef8
+    -frames                                           0x00015ea4
+    -setLooped:                                       0x00015cbc
+    -looped                                           0x00015ca8
+    -frameRate                                        0x00015d00
+    -setFrameRate:                                    0x00015d30
+    -initWithName:frames:frameRate:looped:            0x00015dc0
+    -initWithName:frames:frameRate:                   0x00015d60
+    -initWithName:frames:                             0x00015d94
+
+FlxBlock
+    -image                                            0x000183c8
+    -setEmpties:                                      0x00017a28
+    -empties                                          0x00017a14
+    -description                                      0x00017a3c
+    -render                                           0x000182cc
+    -setImage:                                        0x00017b78
+
+FlxButton
+    -visibility:                                      0x00023e9c
+    -updatePositions                                  0x00023fb8
+    -on                                               0x00023e88
+    -switchOn                                         0x00023e70
+    -switchOff                                        0x00023e58
+    -render                                           0x000246b4
+    -update                                           0x00024400
+    -dealloc                                          0x000245c8
+    -setVisible:                                      0x00024674
+    -initWithOrigin:image:target:selector:imageOn:text:textOn: 0x00024a6c
+    -initWithOrigin:image:target:selector:imageOn:text: 0x000241b4
+    -initWithOrigin:image:target:selector:imageOn:    0x00024208
+    -initWithOrigin:image:target:selector:            0x00024254
+
+FlxCore
+    -setExists:                                       0x0000b398
+    -exists                                           0x0000b384
+    -setActive:                                       0x0000b370
+    -active                                           0x0000b35c
+    -setVisible:                                      0x0000b348
+    -visible                                          0x0000b334
+    -setDead:                                         0x0000b320
+    -dead                                             0x0000b30c
+    -setFrame:                                        0x0000bf6c
+    -frame                                            0x0000bfb8
+    -setScrollFactor:                                 0x0000c008
+    -scrollFactor                                     0x0000c048
+    -moveToPoint:duration:target:selector:            0x0000b534
+    -moveToPoint:duration:                            0x0000b3ac
+    -screenPosition                                   0x0000c27c
+    -onScreen                                         0x0000b610
+    -flickering                                       0x0000b2f0
+    -flicker                                          0x0000b2d0
+    -setFlicker:                                      0x0000b3e4
+    -kill                                             0x0000b43c
+    -hitCeiling                                       0x0000b2c8
+    -hitFloor                                         0x0000b2c0
+    -hitWall                                          0x0000b2b8
+    -collide:                                         0x0000c3ac
+    -overlapsPoint:                                   0x0000bac8
+    -overlaps:                                        0x0000bc8c
+    -render                                           0x0000b2b4
+    -update                                           0x0000b848
+    -setSize:                                         0x0000ded8
+    -setOrigin:                                       0x0000df44
+    -setHeight:                                       0x0000dfb0
+    -setWidth:                                        0x0000b478
+    -setY:                                            0x0000ddf8
+    -setX:                                            0x0000de68
+    -size                                             0x0000b708
+    -origin                                           0x0000b748
+    -height                                           0x0000b788
+    -width                                            0x0000b7b8
+    -y                                                0x0000b7e8
+    -x                                                0x0000b818
+    -initWithFrame:                                   0x0000c144
+    -init                                             0x0000b4e8
+
+FlxEmitter
+    -setMinVelocity:                                  0x000120b0
+    -minVelocity                                      0x000120f0
+    -setMaxVelocity:                                  0x0001213c
+    -maxVelocity                                      0x0001217c
+    -sprites                                          0x00012090
+    -delay                                            0x00011abc
+    -setMinRotation:                                  0x00011aa4
+    -minRotation                                      0x00011a8c
+    -setMaxRotation:                                  0x00011a74
+    -maxRotation                                      0x00011a5c
+    -setGravity:                                      0x00011a44
+    -gravity                                          0x00011a2c
+    -setDrag:                                         0x00011a14
+    -drag                                             0x000119fc
+    -kill                                             0x00011f7c
+    -emit                                             0x00012320
+    -reset                                            0x000119b4
+    -update                                           0x00011ad4
+    -setDelay:                                        0x00011c90
+    -setImage:quantity:multiple:parent:               0x00011ce0
+    -setSprites:                                      0x00011e44
+    -initWithFrame:                                   0x000121c8
+    -init                                             0x00011eb0
+
+FlxGLView
+    -context                                          0x00011214
+    -framebuffer                                      0x00011200
+    -renderbuffer                                     0x000111ec
+    -depthbuffer                                      0x000111d8
+    -backingWidth                                     0x000111c4
+    -backingHeight                                    0x000111b0
+    -touchesMoved:withEvent:                          0x00011228
+    -touchesEnded:withEvent:                          0x00011274
+    -touchesCancelled:withEvent:                      0x000112fc
+    -touchesBegan:withEvent:                          0x00011384
+    -destroyFramebuffer                               0x00011824
+    -createFramebuffer                                0x000116dc
+    -dealloc                                          0x000113d0
+    -initWithFrame:                                   0x00011478
+
+FlxGame
+    -setPaused:                                       0x0000621c
+    -paused                                           0x00006208
+    -elapsed                                          0x000061f0
+    -window                                           0x000061dc
+    -glView                                           0x000061c8
+    -flashAnimation:finished:context:                 0x00006230
+    -flash:duration:target:selector:force:            0x00006298
+    -flash:duration:target:selector:                  0x000063f4
+    -flash:duration:                                  0x00006428
+    -flash:                                           0x00006458
+    -gameLoop                                         0x00006fcc
+    -quakeWithIntensity:duration:                     0x00006180
+    -switchState:                                     0x00006eec
+    -size                                             0x00006144
+    -backgroundColor                                  0x00006130
+    -setBackgroundColor:                              0x00006e7c
+    -fadeDefaultViewAnimation:finished:context:       0x00006478
+    -dealloc                                          0x000066b0
+    -initWithState:orientation:backgroundColor:       0x0000672c
+    -initWithState:orientation:                       0x000064ac
+    -initWithState:                                   0x00006538
+
+FlxGlobal
+    -setFollowTarget:                                 0x00005374
+    -followTarget                                     0x00005334
+    -setFollowLead:                                   0x000053e4
+    -followLead                                       0x00005424
+    -setFollowLerp:                                   0x00003d20
+    -followLerp                                       0x00003d08
+    -setFollowMin:                                    0x00005470
+    -followMin                                        0x000054b0
+    -setFollowMax:                                    0x000054fc
+    -followMax                                        0x0000553c
+    -setScrollTarget:                                 0x00005588
+    -scrollTarget                                     0x000055c8
+    -setElapsed:                                      0x00003cf0
+    -elapsed                                          0x00003cd8
+    -setScroll:                                       0x00005614
+    -scroll                                           0x00005654
+    -size                                             0x000056a0
+    -setState:                                        0x000053ac
+    -state                                            0x00005354
+    -flash:duration:target:selector:force:            0x00003d38
+    -flash:duration:target:selector:                  0x00003d8c
+    -flash:duration:                                  0x00003dd8
+    -flash:                                           0x00003e0c
+    -randFloat                                        0x00003e40
+    -rand                                             0x00005320
+    -collideCores:withSprites:                        0x00004b50
+    -collideCores:withSprite:                         0x00004ea0
+    -followBounds:                                    0x00005ec4
+    -followAdjust:                                    0x00003ca8
+    -follow:lerp:                                     0x00005fe0
+    -follow:                                          0x00003e74
+    -quakeWithIntensity:duration:                     0x00003e94
+    -switchState:                                     0x00003ec8
+    -touchPoint                                       0x00004440
+    -touch                                            0x00003efc
+    -processTouches:                                  0x00003f30
+    -play:                                            0x00005268
+    -load:                                            0x000058c4
+    -teardownOpenAL                                   0x000050f8
+    -setupOpenAL                                      0x0000573c
+    -checkForOtherAudio                               0x0000501c
+    -audioPlayerEndInterruption:                      0x00003f80
+    -audioPlayerBeginInterruption:                    0x00003ff4
+    -audioSessionEndInterruption                      0x00005c64
+    -audioSessionBeginInterruption                    0x00003c90
+    -applicationDidBecomeActive:                      0x00004760
+    -applicationWillResignActive:                     0x0000487c
+    -setMusic:                                        0x000048f4
+    -initAudio                                        0x00004600
+    -rotatePoint:aboutPivot:throughAngle:             0x00005dfc
+    -computeVelocityForVelocity:acceleration:drag:max: 0x00004040
+    -loadTextureForColor:                             0x0000415c
+    -loadTextureFromImage:                            0x00004184
+    -height                                           0x0000454c
+    -width                                            0x0000457c
+    -game                                             0x00003c7c
+    -setGame:                                         0x000045ac
+    -dealloc                                          0x0000432c
+    -release                                          0x00003c78
+    -init                                             0x000043bc
+
+FlxLayer
+    -children                                         0x0000e048
+    -setDebug:                                        0x0000e034
+    -debug                                            0x0000e020
+    -destroy                                          0x0000e05c
+    -render                                           0x0000e2d0
+    -update                                           0x0000e088
+    -add:                                             0x0000e180
+    -dealloc                                          0x0000e1ac
+    -init                                             0x0000e20c
+
+FlxSimpleBlock
+    -image                                            0x00025f04
+    -description                                      0x000258d0
+    -render                                           0x00025e14
+    -setImage:                                        0x00025a0c
+
+FlxSprite
+    -setDebug:                                        0x0000e99c
+    -debug                                            0x0000e988
+    -animationSize                                    0x0000fa70
+    -setOffset:                                       0x0000fabc
+    -offset                                           0x0000fafc
+    -setVelocity:                                     0x0000fb48
+    -velocity                                         0x0000fb88
+    -setAcceleration:                                 0x0000fbd4
+    -acceleration                                     0x0000fc14
+    -setDrag:                                         0x0000fc60
+    -drag                                             0x0000fca0
+    -setMaxVelocity:                                  0x0000fcec
+    -maxVelocity                                      0x0000fd2c
+    -setAngle:                                        0x0000e970
+    -angle                                            0x0000e958
+    -setAngularVelocity:                              0x0000e940
+    -angularVelocity                                  0x0000e928
+    -setAngularAcceleration:                          0x0000e910
+    -angularAcceleration                              0x0000e8f8
+    -setAngularDrag:                                  0x0000e8e0
+    -angularDrag                                      0x0000e8c8
+    -setMaxAngular:                                   0x0000e8b0
+    -maxAngular                                       0x0000e898
+    -setThrust:                                       0x0000e880
+    -thrust                                           0x0000e868
+    -setMaxThrust:                                    0x0000e850
+    -maxThrust                                        0x0000e838
+    -setHealth:                                       0x0000e820
+    -health                                           0x0000e808
+    -setFinished:                                     0x0000e7f4
+    -finished                                         0x0000e7e0
+    -alpha                                            0x0000e7c8
+    -facing                                           0x0000e7b4
+    -animationHeight                                  0x0000e79c
+    -animationWidth                                   0x0000e784
+    -setAnimationHeight:                              0x00010868
+    -setAnimationWidth:                               0x0000e9b0
+    -setAnimationSize:                                0x0000f0a8
+    -calcFrame                                        0x0000f1c4
+    -randomFrame                                      0x0000f324
+    -play:force:                                      0x0000f8a4
+    -play:                                            0x0000e9e4
+    -setAnimationCallbackTarget:action:               0x0000e760
+    -addAnimation:frames:frameRate:looped:            0x0000ea04
+    -addAnimation:frames:frameRate:                   0x0000eaa8
+    -addAnimation:frames:                             0x0000eadc
+    -onEmit                                           0x0000e75c
+    -updateUVs                                        0x0000e5c4
+    -updateVertices                                   0x0000e52c
+    -setFacing:                                       0x0000eb08
+    -setAlpha:                                        0x0000e46c
+    -setFrame:                                        0x0000f6c0
+    -screenPosition                                   0x0000fd78
+    -render                                           0x0000f48c
+    -update                                           0x0000fed0
+    -setup                                            0x000104b4
+    -dealloc                                          0x0000ede8
+    -initWithColor:                                   0x0000efbc
+    -initWithImage:                                   0x0000ee64
+    -init                                             0x0000ef44
+
+FlxState
+    -render                                           0x000077c0
+    -update                                           0x000077ec
+    -add:                                             0x00007818
+    -dealloc                                          0x00007844
+    -init                                             0x000078a4
+
+FlxText
+    -updateTexture                                    0x00023554
+    -createTexture                                    0x000234f0
+    -updateUVs                                        0x00022b6c
+    -updateVertices                                   0x00022af0
+    -setFrame:                                        0x00023828
+    -render                                           0x00023368
+    -color                                            0x00022c28
+    -setColor:                                        0x00022c54
+    -text                                             0x00022c98
+    -setText:                                         0x0002390c
+    -sizeToFit                                        0x000239fc
+    -dealloc                                          0x00023308
+    -initWithFrame:text:color:font:size:align:angle:  0x00023b04
+    -initWithFrame:text:color:font:size:align:        0x00022cc4
+    -initWithFrame:text:color:font:size:              0x00022d48
+    -initWithFrame:text:color:font:                   0x00022dc4
+    -initWithFrame:text:color:                        0x00022e38
+    -initWithFrame:text:                              0x00022ea8
+    -initWithFrame:                                   0x00022f34
+
+FlxTexture
+    -name                                             0x000108ac
+    -size                                             0x00010e48
+    -paddedSize                                       0x00010e94
+    -description                                      0x000108c0
+    -copyWithZone:                                    0x00010910
+    -dealloc                                          0x00010dc4
+    -initWithColor:                                   0x00010ee0
+    -initWithImage:                                   0x00010a20
+
+FlxViewController
+    -setOrientation:                                  0x000118d8
+    -orientation                                      0x000118c4
+    -loadView                                         0x000118ec
+    -shouldAutorotateToInterfaceOrientation:          0x000118a4
+
+Gib
+    -init                                             0x00026808
+
+HUD
+    -distance                                         0x00024e0c
+    -render                                           0x000257f4
+    -updateCoordinates                                0x00025054
+    -setDistance:                                     0x00024e20
+    -initWithFrame:                                   0x00024e58
+
+Jet
+    -update                                           0x000162e0
+    -init                                             0x000161a4
+
+KeychainUtils
+
+MenuState
+    -onScores                                         0x00007d14
+    -onBack                                           0x00008344
+    -onAbout                                          0x0000904c
+    -onPlay                                           0x000079a0
+    -update                                           0x00007b20
+    -dealloc                                          0x00007a10
+    -init                                             0x0000977c
+
+NewNameController
+    -setName:                                         0x0002e908
+    -name                                             0x0002e8e8
+    -setPlace:                                        0x0002e54c
+    -place                                            0x0002e538
+    -setDistance:                                     0x0002e524
+    -distance                                         0x0002e510
+    -setDelegate:                                     0x0002e4fc
+    -delegate                                         0x0002e4e8
+    -cancelPressed:                                   0x0002e560
+    -okPressed:                                       0x0002e5fc
+    -touchesEnded                                     0x0002e6f0
+    -textFieldShouldReturn:                           0x0002e78c
+    -getName                                          0x0002e93c
+    -dealloc                                          0x0002e860
+    -init                                             0x0002e89c
+
+NokiaFont
+    -dealloc                                          0x00020980
+    -initWithSize:                                    0x0002090c
+    -setGlyphs:forCharacters:size:                    0x000208b4
+
+Obstacle
+    -kill                                             0x00020308
+    -hitFloor                                         0x000202d8
+    -update                                           0x00020648
+    -initWithOrigin:player:alt:                       0x00020488
+    -initWithOrigin:player:                           0x00020394
+
+PlayState
+    -willTerminate:                                   0x00012854
+    -saveNewScore                                     0x00012888
+    -textFieldShouldEndEditing:                       0x0001284c
+    -textFieldShouldReturn:                           0x00012acc
+    -textFieldDidEndEditing:                          0x00012af0
+    -onTwitter                                        0x00012b10
+    -update                                           0x00012f38
+    -newNameController:enteredNewName:                0x00012cc4
+    -dealloc                                          0x00012ec8
+    -init                                             0x00014448
+
+Player
+    -setJumpLimit:                                    0x00016534
+    -jumpLimit                                        0x0001651c
+    -setOnFloor:                                      0x00016508
+    -onFloor                                          0x000164f4
+    -stumble                                          0x000164e0
+    -setCraneFeet:                                    0x000164cc
+    -craneFeet                                        0x000164b8
+    -setEpitaph:                                      0x000168b0
+    -epitaph                                          0x00016890
+    -setStumble:                                      0x0001654c
+    -hitWall                                          0x00016618
+    -hitFloor                                         0x000166f4
+    -update                                           0x00016950
+    -dealloc                                          0x000167d8
+    -init                                             0x000171b4
+
+SSFont
+    -renderText:centeredAtPoint:inContext:            0x00020de0
+    -font                                             0x00020ad4
+    -size                                             0x00020abc
+    -sizeToRenderString:                              0x00020c2c
+    -setGlyphs:forCharacters:size:                    0x00020a88
+    -initWithSize:                                    0x00020bb4
+    -fontWithSize:                                    0x00020ae8
+    -description                                      0x00020b3c
+
+SSText
+    -color                                            0x000210cc
+    -text                                             0x000210b8
+    -effect                                           0x000210a4
+    -setAlign:                                        0x00021090
+    -align                                            0x0002107c
+    -shadowColor                                      0x00021068
+    -touchDelegate                                    0x00021054
+    -setWrapped:                                      0x00021040
+    -isWrapped                                        0x0002102c
+    -drawRect:                                        0x00022624
+    -setEffect:                                       0x0002112c
+    -setShadowColor:                                  0x0002177c
+    -setColor:                                        0x000217d0
+    -font                                             0x00020fd4
+    -setFont:                                         0x00021164
+    -setText:                                         0x00021300
+    -padding                                          0x00020fc8
+    -dealloc                                          0x000216c4
+    -initWithFrame:                                   0x000214f4
+    -setTouchDelegate:                                0x00021380
+    -description                                      0x00021408
+
+Sequence
+    -blocks                                           0x00018448
+    -aftermath                                        0x00018744
+    -clear                                            0x0001845c
+    -decorateSeqX:seqY:seqWidth:                      0x000189f8
+    -reset                                            0x00019440
+    -render                                           0x000184ac
+    -update                                           0x00018684
+    -init:                                            0x00018508
+    -dealloc                                          0x00018534
+    -initWithPlayer:shardsA:shardsB:                  0x000190f8
+
+Shard
+    -hitFloor                                         0x0001e314
+    -update                                           0x0001e408
+    -init                                             0x0001e8b0
+
+SimpleBG
+    -setRandom:                                       0x00028fe8
+    -random                                           0x00028fd4
+    -update                                           0x00028ffc
+
+SimpleBlock
+    -render                                           0x00026ec4
+    -dealloc                                          0x00026a98
+    -initWithFrame:image:                             0x00026b74
+
+SimpleCBlock
+    -render                                           0x00028930
+    -dealloc                                          0x00027c24
+    -initWithFrame:image:                             0x00027e58
+
+SimpleSprite
+    -render                                           0x000262a4
+    -randomFrame                                      0x00025f70
+    -calcFrame                                        0x00025fdc
+    -setFacing:                                       0x00025f50
+    -setAlpha:                                        0x00026108
+    -setFrame:                                        0x00025f24
+    -initWithImage:                                   0x00026120
+
+Smoke
+    -init                                             0x00026954
+
+TweetViewController
+    -release                                          0x0002f8e4
+    -loadView                                         0x0002f950
+    -shouldAutorotateToInterfaceOrientation:          0x0002f8d4
+
+TwitterController
+    -setEpitaph:                                      0x0002a3fc
+    -epitaph                                          0x0002a3dc
+    -accountPressed:                                  0x00029260
+    -postCancelPressed:                               0x000292ec
+    -yesPressed:                                      0x00029388
+    -accountCancelPressed:                            0x000293a4
+    -okPressed:                                       0x00029510
+    -hideKeyboard                                     0x0002968c
+    -touchesEnded                                     0x000296e8
+    -textFieldShouldReturn:                           0x00029ea4
+    -checkTwitterOkButton                             0x00029704
+    -textFieldShouldBeginEditing:                     0x00029ffc
+    -connectionShouldUseCredentialStorage:            0x0002a09c
+    -donePressed:                                     0x000297d0
+    -connectionDidFinishLoading:                      0x0002af68
+    -connection:willSendRequest:redirectResponse:     0x0002a0bc
+    -connection:willCacheResponse:                    0x0002a0e8
+    -connection:didSendBodyData:totalBytesWritten:totalBytesExpectedToWrite: 0x0002a110
+    -connection:didReceiveResponse:                   0x0002a144
+    -connection:didReceiveData:                       0x0002a164
+    -connection:didReceiveAuthenticationChallenge:    0x0002986c
+    -connection:didFailWithError:                     0x0002a1dc
+    -connection:canAuthenticateAgainstProtectionSpace: 0x0002a3b8
+    -keyboardDidHide:                                 0x0002abf8
+    -keyboardDidShow:                                 0x0002adb0
+    -sendTweet                                        0x0002a934
+    -createAccountPage                                0x0002b58c
+    -createPostPage                                   0x0002c85c
+    -doTweet                                          0x0002a430
+    -unregisterForNotifications                       0x00029a28
+    -registerForNotifications                         0x00029a68
+    -dealloc                                          0x00029d78
+    -init                                             0x00029e40
+
+Walker
+    -update                                           0x00015400
+    -dealloc                                          0x000152e0
+    -initWithSmoke:                                   0x00015a24
+
+Window
+    -update                                           0x0001dde0
+    -dealloc                                          0x0001dd64
+    -initAtPoint:height:layer:player:shards:          0x0001dfe4
+
+WindowBlock
+    -image                                            0x00027c04
+    -setEmpties:                                      0x00026fb8
+    -empties                                          0x00026fa4
+    -description                                      0x00026fcc
+    -render                                           0x00027b08
+    -setImage:                                        0x00027108
+
