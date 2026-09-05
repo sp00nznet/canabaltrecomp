@@ -3,14 +3,15 @@
 > *Canabalt* (Semi Secret Software, 2009) as a native desktop application,
 > lifted from the original armv6 iPhone binary. Bring your own `.ipa`.
 
-**Status: the game runs its whole launch path.** All 626 functions of the armv6
+**Status: the game runs, and says so.** All 626 functions of the armv6
 binary become C and the result compiles; every lifted instruction and whole
 function tested agrees with an emulator. The image loads at its own link
 address, the Objective-C class table is realized, and `objc_msgSend` dispatches
-into lifted code -- so the game runs from `_start` through
-`applicationDidFinishLaunching:`, the audio load loop and the whole flixel
-setup, and calls `exit(0)`. What it still asks for is measured rather than
-guessed: 18 messages and 27 imports, and they are now the window itself. See
+into lifted code -- so the game runs from `_start` through the whole
+launch, the audio load loop, the GL framebuffer setup, texture loading and
+sprite construction, and into font loading -- printing its own `NSLog` output
+along the way. 80 imports answered, 67 to go, and what is left is CoreGraphics
+text and image rasterisation. See
 [Milestones](#milestones).
 
 ---
@@ -194,34 +195,42 @@ belongs in the toolkit.
       88/88 test messages reach the right implementation, and the realized
       table agrees with `objc_dump.py` on every class and method. The game's
       own 314 selectors are answered by its own lifted code.
-- [ ] **M7 — shims.** The game runs its *whole* launch path on what exists and
-      calls `exit(0)`:
+- [ ] **M7 — shims.** 80 of the 147 reachable imports answered, and the game
+      runs a long way on them:
 
       ```
       start -> _main -> UIApplicationMain
         -[CanabaltAppDelegate applicationDidFinishLaunching:]
-          -[CanabaltAppDelegate preloadSounds]
-          +[FlxGlobal sharedFlxGlobal] -> -[FlxGlobal init] -> initAudio
-          -[FlxGlobal load:] x N          (the audio load loop)
+          preloadSounds -> +[FlxGlobal sharedFlxGlobal] -> initAudio
+            checkForOtherAudio, setupOpenAL, load: x N
           -[FlxGame initWithState:orientation:]
-            -[FlxGLView initWithFrame:]
+            -[FlxGLView initWithFrame:] -> createFramebuffer
             -[FlxGame switchState:] -> setBackgroundColor:
+          -[FlxGlobal loadTextureFromImage:] -> +[FlxTexture textureWithImage:]
+          -[FlxCore setActive:/setVisible:/setDead:/setScrollFactor:]
+          -[SSText setColor:/setShadowColor:/setText:]
+          +[SSFont fontWithName:size:]        <- stops here, CGFontRetain
       ```
 
-      Foundation is answered well enough to get there -- NSString with a real
-      format implementation, NSNumber, NSDictionary, NSUserDefaults, NSBundle,
-      NSURL -- and `+[UIColor(HexColor) colorWithHexRed:...]` answers from the
-      game's own lifted code, because a category on a framework class is
-      compiled into this binary even though the class is not.
+      It prints its own log while doing it, because `NSLog` works:
 
-      One `--permissive` run names everything left: **18 messages and 27
-      imports**. What they name is now the window itself.
+      ```
+      [guest] check for other audio!
+      [guest] is other audio playing: 0
+      [guest] Error opening file (bomb_explode.caf): 2003334207
+      ```
 
-      | still owed | |
-      |---|---|
-      | the window | `UIScreen mainScreen`, `UIWindow initWithFrame:`, `UIView initWithFrame:` |
-      | the frame loop | `CADisplayLink displayLinkWithTarget:selector:`, `NSRunLoop currentRunLoop` |
-      | drawing | the OpenGLES imports, `UIImage imageNamed:`, `UIView` animation |
-      | audio | `AudioSession*`, `AudioFile*`, the OpenAL imports |
+      Those audio errors are deliberate. The shim reports that opening the file
+      failed, with the code the real framework returns, so the game takes the
+      no-sound path it already has -- telling it the open *succeeded* and then
+      handing back a zero length had it allocate a quarter of a gigabyte from a
+      size it was never given.
+
+      OpenGL ES cost almost nothing: every entry point the game uses is also
+      OpenGL 1.1 under the same name, so the shims are calls and the system
+      library resolves all thirty-eight with no loader.
+
+      What is left is CoreGraphics fonts and images -- the text and sprite
+      rasterisation -- and then the frame loop has something to draw.
 
 - [ ] **M8 — a window, and a man running to the right.**
