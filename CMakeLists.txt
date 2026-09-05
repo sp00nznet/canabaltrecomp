@@ -33,6 +33,9 @@ if(CANABALT_LIFTED)
   else()
     target_compile_options(canabalt_lifted PRIVATE -w)
   endif()
+  # The guest backtrace. One store per lifted call, and without it a fault
+  # inside 626 identically shaped C functions names nothing at all.
+  target_compile_definitions(canabalt_lifted PUBLIC ARC_FRAMES)
   target_link_libraries(canabalt_host PRIVATE canabalt_lifted)
   message(STATUS "canabaltrecomp: lifted program found -- linking it in")
 else()
