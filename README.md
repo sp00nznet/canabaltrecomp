@@ -3,13 +3,14 @@
 > *Canabalt* (Semi Secret Software, 2009) as a native desktop application,
 > lifted from the original armv6 iPhone binary. Bring your own `.ipa`.
 
-**Status: the game runs its own startup code.** All 626 functions of the armv6
+**Status: the game runs its whole launch path.** All 626 functions of the armv6
 binary become C and the result compiles; every lifted instruction and whole
 function tested agrees with an emulator. The image loads at its own link
 address, the Objective-C class table is realized, and `objc_msgSend` dispatches
-into lifted code -- so the game boots through `UIApplicationMain` and into
-`-[FlxGame initWithState:orientation:]`, which is lifted flixel, running. What
-is missing is the frameworks underneath it, and a window. See
+into lifted code -- so the game runs from `_start` through
+`applicationDidFinishLaunching:`, the audio load loop and the whole flixel
+setup, and calls `exit(0)`. What it still asks for is measured rather than
+guessed: 18 messages and 27 imports, and they are now the window itself. See
 [Milestones](#milestones).
 
 ---
@@ -193,34 +194,34 @@ belongs in the toolkit.
       88/88 test messages reach the right implementation, and the realized
       table agrees with `objc_dump.py` on every class and method. The game's
       own 314 selectors are answered by its own lifted code.
-- [ ] **M7 — shims.** The 192 selectors and 205 imports iOS used to provide.
-      The game already boots eight frames into its own code on the
-      scaffolding, and one `--permissive` run names the twelve framework
-      messages that carry it there:
+- [ ] **M7 — shims.** The game runs its *whole* launch path on what exists and
+      calls `exit(0)`:
 
       ```
-      start
-        _main
-          UIApplicationMain
-            -[CanabaltAppDelegate applicationDidFinishLaunching:]
-              -[CanabaltAppDelegate preloadSounds]
-              +[FlxGlobal sharedFlxGlobal]
-                -[FlxGlobal init]
-                  -[FlxGame initWithState:orientation:]
-                    -[FlxGame initWithState:orientation:backgroundColor:]
+      start -> _main -> UIApplicationMain
+        -[CanabaltAppDelegate applicationDidFinishLaunching:]
+          -[CanabaltAppDelegate preloadSounds]
+          +[FlxGlobal sharedFlxGlobal] -> -[FlxGlobal init] -> initAudio
+          -[FlxGlobal load:] x N          (the audio load loop)
+          -[FlxGame initWithState:orientation:]
+            -[FlxGLView initWithFrame:]
+            -[FlxGame switchState:] -> setBackgroundColor:
       ```
 
-      | class | selector |
+      Foundation is answered well enough to get there -- NSString with a real
+      format implementation, NSNumber, NSDictionary, NSUserDefaults, NSBundle,
+      NSURL -- and `+[UIColor(HexColor) colorWithHexRed:...]` answers from the
+      game's own lifted code, because a category on a framework class is
+      compiled into this binary even though the class is not.
+
+      One `--permissive` run names everything left: **18 messages and 27
+      imports**. What they name is now the window itself.
+
+      | still owed | |
       |---|---|
-      | NSUserDefaults | `standardUserDefaults` |
-      | NSBundle | `mainBundle` |
-      | NSNumber | `numberWithInteger:`, `numberWithBool:`, `numberWithFloat:` |
-      | NSDictionary | `dictionaryWithObjectsAndKeys:` |
-      | UIColor | `colorWithRed:green:blue:alpha:`, `colorWithHexRed:...` |
-      | UIApplication | `setStatusBarOrientation:animated:` |
-      | NSInvocationOperation | `initWithTarget:selector:object:` |
-      | NSOperationQueue | `addOperation:` |
+      | the window | `UIScreen mainScreen`, `UIWindow initWithFrame:`, `UIView initWithFrame:` |
+      | the frame loop | `CADisplayLink displayLinkWithTarget:selector:`, `NSRunLoop currentRunLoop` |
+      | drawing | the OpenGLES imports, `UIImage imageNamed:`, `UIView` animation |
+      | audio | `AudioSession*`, `AudioFile*`, the OpenAL imports |
 
-      The host boundary is still the three classes above; what is new is that
-      the list is measured rather than estimated.
 - [ ] **M8 — a window, and a man running to the right.**
