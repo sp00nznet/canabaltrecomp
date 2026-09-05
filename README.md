@@ -177,9 +177,15 @@ belongs in the toolkit.
 - [x] **M4 — emitter.** 626 of 626 functions, 41,167 of 41,167 instructions,
       compiling clean. No interworking, no Thumb, no IT blocks — the reason
       this game is first.
-- [ ] **M5 — differential test.** Per instruction: **done**, at 100% agreement
-      with Unicorn over 159 operand forms. Whole functions next, then against
-      what the published source says they should compute.
+- [x] **M5 — differential test.** 62,421 per-instruction cases over 159
+      operand forms and 3,000 whole-function cases over 150 of the game's 152
+      self-contained functions, all at 100% agreement with Unicorn. Next:
+      against what the published source says they should compute.
+- [x] **M5.5 — the game loads where it has to.** The binary carries no
+      relocations, so it can only go at its link address -- which is under the
+      64 KB floor. The lifter folds all 5,852 literal-pool loads into
+      constants, which leaves nothing reading `__text`, so the image maps from
+      `0x10000` up with a zero slide.
 - [ ] **M6 — ObjC runtime and shims.** Enough of UIKit, OpenGLES and the
       runtime to reach `applicationDidFinishLaunching:`.
 - [ ] **M7 — a window, and a man running to the right.**
