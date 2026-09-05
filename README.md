@@ -3,10 +3,12 @@
 > *Canabalt* (Semi Secret Software, 2009) as a native desktop application,
 > lifted from the original armv6 iPhone binary. Bring your own `.ipa`.
 
-**Status: the binary loads.** `canabalt_host` parses the armv6 Mach-O, maps it,
-and prints an exact per-framework work list of 205 outstanding imports. The
-Objective-C class table is extracted. No emitter yet — that is the point of
-this repo. See [Milestones](#milestones).
+**Status: the game lifts.** All 626 functions of the armv6 binary become C,
+the result compiles, and every lifted instruction that has been tested agrees
+with an emulator. `canabalt_host` maps the image and prints an exact
+per-framework work list of 205 outstanding imports; the Objective-C class table
+is extracted. What is missing is underneath the lifted code — the ObjC
+dispatch, the shims, and a window. See [Milestones](#milestones).
 
 ---
 
@@ -135,6 +137,17 @@ python iparecomp/tools/objc_dump.py <binary> --contract > contract/canabalt-clas
 python iparecomp/tools/ipa_probe.py Canabalt.ipa --out docs/triage-canabalt-armv6.md
 ```
 
+Lift the game. The output is machine code derived from a binary you supplied,
+so it is built locally and never committed — `.gitignore` keeps `generated/`
+out, and CMake picks it up automatically once it exists:
+
+```sh
+python iparecomp/tools/lifter.py Canabalt.ipa --report      # 626/626 functions
+python iparecomp/tools/lifter.py Canabalt.ipa --out generated/
+python iparecomp/tools/lift_verify.py Canabalt.ipa          # against Unicorn
+cmake --build build
+```
+
 ## This repo is the thin half
 
 ```
@@ -142,6 +155,7 @@ canabaltrecomp/
 ├── iparecomp/                      # submodule -- loader, shims, emitter, tools
 ├── contract/canabalt-classes.txt   # the extracted ObjC class table
 ├── docs/triage-canabalt-armv6.md
+├── generated/                      # the lifted game -- built locally, never committed
 └── CMakeLists.txt
 ```
 
@@ -157,12 +171,15 @@ belongs in the toolkit.
       boundary narrowed to three of them.
 - [x] **M2 — the binary loads.** Segments mapped, slide recorded, 205 imports
       resolved to their owing frameworks.
-- [ ] **M3 — decoder.** armv6 to an internal form, checked against capstone on
-      this binary's own 37,185 instructions.
-- [ ] **M4 — emitter.** 626 functions to C. No interworking, no Thumb, no IT
-      blocks — the reason this game is first.
-- [ ] **M5 — differential test.** Every lifted function against an emulator,
-      then against what the published source says it should do.
+- [x] ~~**M3 — decoder.**~~ **Dropped.** Capstone already decodes armv6, so
+      this milestone was to write a worse one and then check it against the
+      real one. The lifter emits from capstone's operand detail directly.
+- [x] **M4 — emitter.** 626 of 626 functions, 41,167 of 41,167 instructions,
+      compiling clean. No interworking, no Thumb, no IT blocks — the reason
+      this game is first.
+- [ ] **M5 — differential test.** Per instruction: **done**, at 100% agreement
+      with Unicorn over 159 operand forms. Whole functions next, then against
+      what the published source says they should compute.
 - [ ] **M6 — ObjC runtime and shims.** Enough of UIKit, OpenGLES and the
       runtime to reach `applicationDidFinishLaunching:`.
 - [ ] **M7 — a window, and a man running to the right.**
