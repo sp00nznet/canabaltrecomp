@@ -3,12 +3,14 @@
 > *Canabalt* (Semi Secret Software, 2009) as a native desktop application,
 > lifted from the original armv6 iPhone binary. Bring your own `.ipa`.
 
-**Status: the game lifts.** All 626 functions of the armv6 binary become C,
-the result compiles, and every lifted instruction that has been tested agrees
-with an emulator. `canabalt_host` maps the image and prints an exact
-per-framework work list of 205 outstanding imports; the Objective-C class table
-is extracted. What is missing is underneath the lifted code — the ObjC
-dispatch, the shims, and a window. See [Milestones](#milestones).
+**Status: the game runs its own startup code.** All 626 functions of the armv6
+binary become C and the result compiles; every lifted instruction and whole
+function tested agrees with an emulator. The image loads at its own link
+address, the Objective-C class table is realized, and `objc_msgSend` dispatches
+into lifted code -- so the game boots through `UIApplicationMain` and into
+`-[FlxGame initWithState:orientation:]`, which is lifted flixel, running. What
+is missing is the frameworks underneath it, and a window. See
+[Milestones](#milestones).
 
 ---
 
@@ -186,6 +188,39 @@ belongs in the toolkit.
       64 KB floor. The lifter folds all 5,852 literal-pool loads into
       constants, which leaves nothing reading `__text`, so the image maps from
       `0x10000` up with a zero slide.
-- [ ] **M6 — ObjC runtime and shims.** Enough of UIKit, OpenGLES and the
-      runtime to reach `applicationDidFinishLaunching:`.
-- [ ] **M7 — a window, and a man running to the right.**
+- [x] **M6 — ObjC runtime.** All 49 classes and their metaclasses realized,
+      categories merged, and `objc_msgSend` answering from the class table.
+      88/88 test messages reach the right implementation, and the realized
+      table agrees with `objc_dump.py` on every class and method. The game's
+      own 314 selectors are answered by its own lifted code.
+- [ ] **M7 — shims.** The 192 selectors and 205 imports iOS used to provide.
+      The game already boots eight frames into its own code on the
+      scaffolding, and one `--permissive` run names the twelve framework
+      messages that carry it there:
+
+      ```
+      start
+        _main
+          UIApplicationMain
+            -[CanabaltAppDelegate applicationDidFinishLaunching:]
+              -[CanabaltAppDelegate preloadSounds]
+              +[FlxGlobal sharedFlxGlobal]
+                -[FlxGlobal init]
+                  -[FlxGame initWithState:orientation:]
+                    -[FlxGame initWithState:orientation:backgroundColor:]
+      ```
+
+      | class | selector |
+      |---|---|
+      | NSUserDefaults | `standardUserDefaults` |
+      | NSBundle | `mainBundle` |
+      | NSNumber | `numberWithInteger:`, `numberWithBool:`, `numberWithFloat:` |
+      | NSDictionary | `dictionaryWithObjectsAndKeys:` |
+      | UIColor | `colorWithRed:green:blue:alpha:`, `colorWithHexRed:...` |
+      | UIApplication | `setStatusBarOrientation:animated:` |
+      | NSInvocationOperation | `initWithTarget:selector:object:` |
+      | NSOperationQueue | `addOperation:` |
+
+      The host boundary is still the three classes above; what is new is that
+      the list is measured rather than estimated.
+- [ ] **M8 — a window, and a man running to the right.**
