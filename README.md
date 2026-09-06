@@ -182,9 +182,11 @@ belongs in the toolkit.
       compiling clean. No interworking, no Thumb, no IT blocks — the reason
       this game is first.
 - [x] **M5 — differential test.** 62,421 per-instruction cases over 159
-      operand forms and 3,000 whole-function cases over 150 of the game's 152
-      self-contained functions, all at 100% agreement with Unicorn. Next:
-      against what the published source says they should compute.
+      operand forms, and 4,726 whole-function cases over **594 of the game's
+      626 functions** -- including every one that calls another, by
+      neutralising the imports identically on both sides. All at 100%
+      agreement with Unicorn. Next: against what the published source says
+      they should compute.
 - [x] **M5.5 — the game loads where it has to.** The binary carries no
       relocations, so it can only go at its link address -- which is under the
       64 KB floor. The lifter folds all 5,852 literal-pool loads into
