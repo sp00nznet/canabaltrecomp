@@ -57,3 +57,7 @@ venv/
 probe.txt
 run.txt
 triage.md
+
+# Scratch from local runs
+build.log
+run.txt
