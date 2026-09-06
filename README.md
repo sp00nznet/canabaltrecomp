@@ -115,39 +115,34 @@ ObjC runtime, and audio.
 
 All of it lives in iparecomp, not here, and the second port inherits it.
 
-## Licence
+## Licence and legal
 
-**MIT.** See [LICENSE](LICENSE) for the full text. Contributions must be your
-own work, offered under the same terms.
+**MIT** — see [LICENSE](LICENSE), and it covers *this repository's own code
+only*. Contributions must be your own work, under the same terms.
 
-## Legal / content policy
+**Tools only.** No game code, no game assets, no bundled art, no publisher
+binaries; `.gitignore` blocks all of it. You bring your own legally obtained
+`.ipa`, and everything here operates on a file you already have. The lifted
+program is built locally from your copy and is never committed.
 
-**Tools only.** No game code, no game assets, no extracted art, no save data,
-no publisher binaries — `.gitignore` blocks all of it, deliberately. You
-supply your own legally obtained `.ipa`, and everything here operates on a file
-you already have. Nothing in this repository downloads, distributes, or
-contains any part of the game.
+**Canabalt is not ours.** *Canabalt* and its artwork, audio and name belong to
+[Semi Secret Software](http://semisecretsoftware.com/) and its authors — Adam
+Saltsman and Danny Baranowsky. The game's own source is separately available
+from its authors under their terms; this repo neither vendors nor
+redistributes it. The recording at the top of this page is a capture of this
+port's output, included to document that it works; the artwork in it is the
+authors', not ours.
 
-The game's own source is separately available from its authors under their
-terms; this repo neither vendors nor redistributes it, and *Canabalt* belongs
-to Semi Secret Software and its authors.
-
-**No Apple code, and no relationship with Apple.** iOS, iPhone, App Store and
-FairPlay are trademarks of Apple Inc. This project is not affiliated with,
-authorised by, endorsed by, or connected to Apple in any way. Apple owns iOS
-and the platform this software targets. No Apple source code, headers, SDKs,
-binaries or branding is used or vendored here.
+**Not affiliated with Apple.** iOS, iPhone, App Store and FairPlay are Apple
+trademarks. No Apple code, headers, SDKs or branding is used or vendored here.
 
 **No circumvention.** The toolkit detects FairPlay encryption and stops. There
 is no decryption here and none will be accepted.
 
-**Why this exists.** The 32-bit iOS catalogue stopped running on any shipping
-device with iOS 11. This is a preservation and educational project about
-static recompilation, aimed at software that no longer runs anywhere.
-
-**If a rights holder wants this taken down, they can have it.** Open an issue
-or contact the maintainer and it will be dealt with in good faith and without
-argument. Nothing here is intended to cause anyone a problem.
+**Why.** The 32-bit iOS catalogue stopped running on any shipping device at
+iOS 11. This is preservation and education. If a rights holder wants anything
+here taken down, open an issue; it will be honoured in good faith, promptly
+and without argument.
 
 ## Building
 
