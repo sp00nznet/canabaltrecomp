@@ -27,9 +27,8 @@ which is where the work is. See [Milestones](#milestones).
 A port, not an emulator: replace the iPhone OS host, satisfy the framework
 import surface, and lift the ARM machine code to C. Built on
 [iparecomp](https://github.com/sp00nznet/iparecomp), vendored here as a
-submodule, exactly as
-[tstorecomp](https://github.com/sp00nznet/tstorecomp) and
-[fgrecomp](https://github.com/sp00nznet/fgrecomp) sit on androidrecomp.
+submodule: the toolkit is deliberately app-agnostic, so everything reusable
+lives there and only what is specific to this title lives here.
 
 ## Why this game
 
