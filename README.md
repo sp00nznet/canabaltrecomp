@@ -195,42 +195,21 @@ belongs in the toolkit.
       88/88 test messages reach the right implementation, and the realized
       table agrees with `objc_dump.py` on every class and method. The game's
       own 314 selectors are answered by its own lifted code.
-- [ ] **M7 — shims.** 80 of the 147 reachable imports answered, and the game
-      runs a long way on them:
+- [ ] **M7 — shims.** 113 of the 147 reachable imports answered. The game
+      loads its own textures now -- the bundle's 73 PNGs, decoded and composed
+      into the buffers it hands to `glTexImage2D` -- and runs from `_start`
+      through audio, the GL framebuffer, sprite construction and into text
+      layout, printing its own `NSLog` output as it goes.
 
-      ```
-      start -> _main -> UIApplicationMain
-        -[CanabaltAppDelegate applicationDidFinishLaunching:]
-          preloadSounds -> +[FlxGlobal sharedFlxGlobal] -> initAudio
-            checkForOtherAudio, setupOpenAL, load: x N
-          -[FlxGame initWithState:orientation:]
-            -[FlxGLView initWithFrame:] -> createFramebuffer
-            -[FlxGame switchState:] -> setBackgroundColor:
-          -[FlxGlobal loadTextureFromImage:] -> +[FlxTexture textureWithImage:]
-          -[FlxCore setActive:/setVisible:/setDead:/setScrollFactor:]
-          -[SSText setColor:/setShadowColor:/setText:]
-          +[SSFont fontWithName:size:]        <- stops here, CGFontRetain
-      ```
+      Text is where it stops, and for a reason worth recording: **a stub that
+      hangs is worse than one that is wrong.** `CGFontGetGlyphAdvances` was
+      given a plausible half-em advance, and `-[SSText(Private)
+      nextWrapOffsetForGlyphs:]` word-wrapped by asking how many glyphs fit in
+      a line, could not fit even one, and never moved. FreeType and the
+      bundle's own `Nokia.ttf` are the answer rather than a better guess.
 
-      It prints its own log while doing it, because `NSLog` works:
-
-      ```
-      [guest] check for other audio!
-      [guest] is other audio playing: 0
-      [guest] Error opening file (bomb_explode.caf): 2003334207
-      ```
-
-      Those audio errors are deliberate. The shim reports that opening the file
-      failed, with the code the real framework returns, so the game takes the
-      no-sound path it already has -- telling it the open *succeeded* and then
-      handing back a zero length had it allocate a quarter of a gigabyte from a
-      size it was never given.
-
-      OpenGL ES cost almost nothing: every entry point the game uses is also
-      OpenGL 1.1 under the same name, so the shims are calls and the system
-      library resolves all thirty-eight with no loader.
-
-      What is left is CoreGraphics fonts and images -- the text and sprite
-      rasterisation -- and then the frame loop has something to draw.
+      The diagnostic that found it is now permanent: every lifted function
+      entry counts against a budget, and exhausting it traps with the guest
+      backtrace intact instead of hanging.
 
 - [ ] **M8 — a window, and a man running to the right.**
