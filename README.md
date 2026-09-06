@@ -5,10 +5,10 @@
 
 ![Canabalt's menu, recompiled, running on Windows](docs/canabalt.gif)
 
-*Recorded from the recompiled binary: the menu draws, the buttons respond, and
-ABOUT opens and closes. The clipped lettering is this recording's age showing
--- the glyphs were being placed ten rows too high, which turned ABOUT into
-HDOUC, and applying the context's transform fixed it shortly afterwards.*
+*The recompiled binary, captured by itself: the title arrives, a tap lands on
+ABOUT, and the credits scroll in. No window, no cursor, and the same frames
+every time -- `ARC_TAP` scripts the taps and `ARC_SHOT_EVERY` writes the
+frames, because a run that draws should be able to record itself.*
 
 **Status: the menu is on screen and it responds.** All 626 functions of the
 armv6 binary become C and the result compiles; every lifted instruction and
