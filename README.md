@@ -196,20 +196,27 @@ belongs in the toolkit.
       table agrees with `objc_dump.py` on every class and method. The game's
       own 314 selectors are answered by its own lifted code.
 - [ ] **M7 — shims.** 113 of the 147 reachable imports answered. The game
-      loads its own textures now -- the bundle's 73 PNGs, decoded and composed
-      into the buffers it hands to `glTexImage2D` -- and runs from `_start`
-      through audio, the GL framebuffer, sprite construction and into text
-      layout, printing its own `NSLog` output as it goes.
+      loads its own textures from the bundle's 73 PNGs, its own font from
+      `Nokia.ttf` through FreeType, and runs from `_start` through audio, the
+      GL framebuffer, sprite construction, the high-score store and the menu's
+      buttons, printing its own `NSLog` output as it goes.
 
-      Text is where it stops, and for a reason worth recording: **a stub that
-      hangs is worse than one that is wrong.** `CGFontGetGlyphAdvances` was
-      given a plausible half-em advance, and `-[SSText(Private)
-      nextWrapOffsetForGlyphs:]` word-wrapped by asking how many glyphs fit in
-      a line, could not fit even one, and never moved. FreeType and the
-      bundle's own `Nokia.ttf` are the answer rather than a better guess.
+      It stops in text layout, on a wild pointer in `-[SSText setText:]`. That
+      is now a reported fault rather than a bare crash:
 
-      The diagnostic that found it is now permanent: every lifted function
-      entry counts against a budget, and exhausting it traps with the guest
-      backtrace intact instead of hanging.
+      ```
+      the guest faulted: reading 0000000080200593
+        0000000080200593 is free
+
+      guest functions entered, most recent first:
+        0x00021300  -[SSText setText:]
+        0x00021fac  -[SSText(Private) computeNewBounds]
+      ```
+
+      Two ABI findings came out of this path and neither has a size rule behind
+      it: `NSRange` and `CGPoint` both come back through `objc_msgSend_stret`,
+      where the hidden return pointer takes r0 and the receiver moves to r1.
+      Reading one as an ordinary send is what had the word-wrap loop searching
+      a string that was not there.
 
 - [ ] **M8 — a window, and a man running to the right.**
