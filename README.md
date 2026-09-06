@@ -3,16 +3,22 @@
 > *Canabalt* (Semi Secret Software, 2009) as a native desktop application,
 > lifted from the original armv6 iPhone binary. Bring your own `.ipa`.
 
-**Status: the game runs, and says so.** All 626 functions of the armv6
-binary become C and the result compiles; every lifted instruction and whole
-function tested agrees with an emulator. The image loads at its own link
+![Canabalt's menu, recompiled, running on Windows](docs/canabalt.gif)
+
+*Recorded from the recompiled binary: the menu draws, the buttons respond, and
+ABOUT opens and closes. The clipped lettering is this recording's age showing
+-- the glyphs were being placed ten rows too high, which turned ABOUT into
+HDOUC, and applying the context's transform fixed it shortly afterwards.*
+
+**Status: the menu is on screen and it responds.** All 626 functions of the
+armv6 binary become C and the result compiles; every lifted instruction and
+whole function tested agrees with an emulator. The image loads at its own link
 address, the Objective-C class table is realized, and `objc_msgSend` dispatches
-into lifted code -- so the game runs from `_start` through the whole
-launch, the audio load loop, the GL framebuffer setup, texture loading and
-sprite construction, and into font loading -- printing its own `NSLog` output
-along the way. 80 imports answered, 67 to go, and what is left is CoreGraphics
-text and image rasterisation. See
-[Milestones](#milestones).
+into lifted code. From there the game runs its whole launch, opens a window,
+drives its own `CADisplayLink` frame loop, rasterises its text through
+FreeType, uploads its textures, and draws the menu -- and a tap on a button
+runs that button's action. Tapping PLAY builds `PlayState` and faults there,
+which is where the work is. See [Milestones](#milestones).
 
 ---
 
