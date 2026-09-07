@@ -10,15 +10,15 @@ ABOUT, and the credits scroll in. No window, no cursor, and the same frames
 every time -- `ARC_TAP` scripts the taps and `ARC_SHOT_EVERY` writes the
 frames, because a run that draws should be able to record itself.*
 
-**Status: the menu is on screen and it responds.** All 626 functions of the
+**Status: it plays.** All 626 functions of the
 armv6 binary become C and the result compiles; every lifted instruction and
 whole function tested agrees with an emulator. The image loads at its own link
 address, the Objective-C class table is realized, and `objc_msgSend` dispatches
 into lifted code. From there the game runs its whole launch, opens a window,
 drives its own `CADisplayLink` frame loop, rasterises its text through
-FreeType, uploads its textures, and draws the menu -- and a tap on a button
-runs that button's action. Tapping PLAY builds `PlayState` and faults there,
-which is where the work is. See [Milestones](#milestones).
+FreeType, uploads its textures, and draws the menu -- and a tap on PLAY starts
+the game. The runner runs, the skyline scrolls behind him, and the level is
+generated as he goes. See [Milestones](#milestones).
 
 ---
 
